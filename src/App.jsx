@@ -1,31 +1,46 @@
 import { useState } from "react";
 import { useSpring, animated } from "react-spring";
-import dieLogo1 from "/die1.svg";
-import dieLogo2 from "/die2.svg";
-import dieLogo3 from "/die3.svg";
-import dieLogo4 from "/die4.svg";
-import dieLogo5 from "/die5.svg";
-import dieLogo6 from "/die6.svg";
-
+import { Container, Row, Col, Collapse } from "react-bootstrap";
 import "./App.css";
+import "./assets/bootstrap.css";
 
 function App() {
+  let newYValue = getRandomNumber(-75, -300);
+  let newXValue = getRandomNumber(-300, -70);
+
   const [dieNumber, setDieNumber] = useState(1);
   const [isRolling, setIsRolling] = useState(false);
+
   const props = useSpring({
-    transform: isRolling ? "rotate(360deg)" : "rotate(0deg)",
-    config: { mass: 4, tension: 80, friction: 50, duration: 300 },
+    transform: isRolling
+      ? `translate(${newXValue}px, ${newYValue * 2}px) rotate(1200deg)`
+      : `translate(${newXValue}px, ${newYValue * 2}px) rotate(0deg)`,
+    config: {
+      mass: 6,
+      tension: 1450,
+      friction: 1000,
+      duration: getRandomNumber(300, 1500),
+    },
   });
 
-  function handleClicks(event) {
+  function handleDiceRoll(e) {
+    console.log(e.target);
+
+    setDieNumber(0);
+
     setIsRolling(true);
     const newDieNumber = getRandomNumber(1, 6);
+
     setTimeout(() => {
       setDieNumber(newDieNumber);
       setIsRolling(false);
-    }, 300); // Adjust the duration as needed
+    }, 600);
+
     return newDieNumber;
   }
+  const handleRollDirection = (e) => {
+    console.log(e.target);
+  };
 
   function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -33,18 +48,28 @@ function App() {
 
   return (
     <>
-      <div>
+      <Container
+        className="container-fluid bg-black bg-opacity-75 rounded-5 p-3"
+        id="diceTable"
+      >
+        <h1 className="text-white ">Roll The Die</h1>
+        <div>
+          <Row variant="secondary text-center align-middle">
+            <Col className="align-middle">
+              <p>Drag to the right and let go to roll the die!</p>
+            </Col>
+          </Row>
+        </div>
+      </Container>
+      <div style={{ position: "sticky" }}>
         <animated.img
           style={props}
-          draggable={false}
-          src={`/die${dieNumber}.svg`}
+          draggable={true}
+          src={`/dice/die${dieNumber}.svg`}
           className="logo"
           alt="die logo ${dieNumber}"
+          onDrag={handleDiceRoll}
         />
-      </div>
-      <h1>die + React</h1>
-      <div className="card">
-        <button onClick={handleClicks}>die shows {dieNumber}</button>
       </div>
     </>
   );
