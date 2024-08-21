@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSpring, animated } from "react-spring";
 import dieLogo1 from "/die1.svg";
 import dieLogo2 from "/die2.svg";
 import dieLogo3 from "/die3.svg";
@@ -10,10 +11,19 @@ import "./App.css";
 
 function App() {
   const [dieNumber, setDieNumber] = useState(1);
+  const [isRolling, setIsRolling] = useState(false);
+  const props = useSpring({
+    transform: isRolling ? "rotate(360deg)" : "rotate(0deg)",
+    config: { mass: 4, tension: 80, friction: 50, duration: 300 },
+  });
 
   function handleClicks(event) {
+    setIsRolling(true);
     const newDieNumber = getRandomNumber(1, 6);
-    setDieNumber(newDieNumber);
+    setTimeout(() => {
+      setDieNumber(newDieNumber);
+      setIsRolling(false);
+    }, 300); // Adjust the duration as needed
     return newDieNumber;
   }
 
@@ -24,25 +34,18 @@ function App() {
   return (
     <>
       <div>
-        <img
+        <animated.img
+          style={props}
           draggable={false}
           src={`/die${dieNumber}.svg`}
           className="logo"
           alt="die logo ${dieNumber}"
         />
-
-        <img src={dieLogo1} className="logo" alt="die logo 1" />
       </div>
       <h1>die + React</h1>
       <div className="card">
         <button onClick={handleClicks}>die shows {dieNumber}</button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the die and React logos to learn more
-      </p>
     </>
   );
 }
