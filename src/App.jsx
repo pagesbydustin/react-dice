@@ -5,11 +5,13 @@ import "./App.css";
 import "./assets/bootstrap.css";
 
 function App() {
-  let newYValue = getRandomNumber(-75, -300);
-  let newXValue = getRandomNumber(-300, -70);
+  let newYValue = getRandomNumber(-50, -300);
+  let newXValue = getRandomNumber(-50, -200);
 
   const [dieNumber, setDieNumber] = useState(1);
   const [isRolling, setIsRolling] = useState(false);
+  const [powerDieHome, setPowerDieHome] = useState({ x: 100, y: 100 });
+  console.log(powerDieHome.x);
 
   const props = useSpring({
     transform: isRolling
@@ -61,7 +63,7 @@ function App() {
           </Row>
         </div>
       </Container>
-      <div style={{ position: "sticky" }}>
+      <div style={{ position: "unset" }}>
         <animated.img
           style={props}
           draggable={true}
