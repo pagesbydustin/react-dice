@@ -5,10 +5,10 @@ import "./App.css";
 import "./assets/bootstrap.css";
 
 function App() {
-  let newYValue = getRandomNumber(-50, 400);
-  let newXValue = getRandomNumber(-600, 600);
+  let newYValue = getRandomNumber(1, 4) * 100;
+  let newXValue = getRandomNumber(0, 12) * 100;
 
-  const [dieNumber, setDieNumber] = useState(1);
+  const [powerDieNumber, setPowerDieNumber] = useState(1);
   const [isRolling, setIsRolling] = useState(false);
   const [powerDieHome, setPowerDieHome] = useState({ x: 0, y: 0 });
 
@@ -16,8 +16,8 @@ function App() {
     x: powerDieHome.x,
     y: powerDieHome.y,
     transform: isRolling
-      ? `translate(${newXValue}px, ${newYValue}px) rotate(1200deg)`
-      : `translate(${newXValue}px, ${newYValue}px) rotate(0deg)`,
+      ? `translate(1100px, ${newYValue}px) rotate(14400deg)`
+      : `translate(${powerDieHome.x}px, ${powerDieHome.y}px) rotate(0deg)`,
     config: {
       mass: 6,
       tension: 1450,
@@ -29,13 +29,13 @@ function App() {
   function handleDiceRoll(e) {
     console.log(newXValue, newYValue);
 
-    setDieNumber(0);
+    setPowerDieNumber(0);
 
     setIsRolling(true);
     const newDieNumber = getRandomNumber(1, 6);
 
     setTimeout(() => {
-      setDieNumber(newDieNumber);
+      setPowerDieNumber(newDieNumber);
       setIsRolling(false);
     }, 600);
 
@@ -51,29 +51,26 @@ function App() {
 
   return (
     <>
-      <Container className="mb-1 container-fluid">
-        <Row className="bg-black bg-opacity-75 rounded-5 align-middle text-center">
-          <Col className="align-middle">
-            <h1 className="text-white">Roll The Die</h1>
-            <p>Drag to the right and let go to roll the die!</p>
-          </Col>
-        </Row>
+      <Container
+        className="text-center mb-1 mt-1 bg-black rounded-5 bg-opacity-75"
+        width={"1280px"}
+      >
+        <h1 className="text-white">Roll The Die</h1>
+        <p>Drag to the right and let go to roll the die!</p>
       </Container>
 
       <Container
         className="container-fluid bg-black bg-opacity-75 rounded-5 p-3"
         id="diceTable"
       >
-        <div style={{ position: "relative" }}>
-          <animated.img
-            style={props}
-            draggable={true}
-            src={`/dice/die${dieNumber}.svg`}
-            className="logo"
-            alt="die logo ${dieNumber}"
-            onDrag={handleDiceRoll}
-          />
-        </div>
+        <animated.img
+          style={props}
+          draggable={true}
+          src={`/dice/die${powerDieNumber}.svg`}
+          className="die"
+          alt="die logo ${powerDieNumber}"
+          onDrag={handleDiceRoll}
+        />
       </Container>
     </>
   );

@@ -8,6 +8,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: block;
 }
 
 a {
@@ -21,8 +22,8 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  display: block;
+  /**place-items: center;*/
   min-width: 320px;
   min-height: 100vh;
   background-color: #19003ab6 !important ;
@@ -47,8 +48,4 @@ button {
 }
 button:hover {
   border-color: #010bca;
-}
-
-.container{
-  width: 100vw;
 }
