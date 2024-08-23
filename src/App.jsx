@@ -41,9 +41,6 @@ function App() {
 
     return newDieNumber;
   }
-  const handleRollDirection = (e) => {
-    console.log(e.target);
-  };
 
   function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
