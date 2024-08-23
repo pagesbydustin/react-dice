@@ -1,0 +1,13 @@
+{
+    "Settings": {
+        "BackgroundImage": "/Dragon.jpg",
+        "GameboardSize": {
+            "x": 650,
+            "y": 600
+        },
+        "HomebaseSize": {
+            "x": 150,
+            "y": 720
+        }
+    }
+}

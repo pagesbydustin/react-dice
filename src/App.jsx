@@ -5,18 +5,19 @@ import "./App.css";
 import "./assets/bootstrap.css";
 
 function App() {
-  let newYValue = getRandomNumber(-50, -300);
-  let newXValue = getRandomNumber(-50, -200);
+  let newYValue = getRandomNumber(-50, 400);
+  let newXValue = getRandomNumber(-600, 600);
 
   const [dieNumber, setDieNumber] = useState(1);
   const [isRolling, setIsRolling] = useState(false);
-  const [powerDieHome, setPowerDieHome] = useState({ x: 100, y: 100 });
-  console.log(powerDieHome.x);
+  const [powerDieHome, setPowerDieHome] = useState({ x: 0, y: 0 });
 
   const props = useSpring({
+    x: powerDieHome.x,
+    y: powerDieHome.y,
     transform: isRolling
-      ? `translate(${newXValue}px, ${newYValue * 2}px) rotate(1200deg)`
-      : `translate(${newXValue}px, ${newYValue * 2}px) rotate(0deg)`,
+      ? `translate(${newXValue}px, ${newYValue}px) rotate(1200deg)`
+      : `translate(${newXValue}px, ${newYValue}px) rotate(0deg)`,
     config: {
       mass: 6,
       tension: 1450,
@@ -26,7 +27,7 @@ function App() {
   });
 
   function handleDiceRoll(e) {
-    console.log(e.target);
+    console.log(newXValue, newYValue);
 
     setDieNumber(0);
 
@@ -50,29 +51,30 @@ function App() {
 
   return (
     <>
+      <Container className="mb-1 container-fluid">
+        <Row className="bg-black bg-opacity-75 rounded-5 align-middle text-center">
+          <Col className="align-middle">
+            <h1 className="text-white">Roll The Die</h1>
+            <p>Drag to the right and let go to roll the die!</p>
+          </Col>
+        </Row>
+      </Container>
+
       <Container
         className="container-fluid bg-black bg-opacity-75 rounded-5 p-3"
         id="diceTable"
       >
-        <h1 className="text-white ">Roll The Die</h1>
-        <div>
-          <Row variant="secondary text-center align-middle">
-            <Col className="align-middle">
-              <p>Drag to the right and let go to roll the die!</p>
-            </Col>
-          </Row>
+        <div style={{ position: "relative" }}>
+          <animated.img
+            style={props}
+            draggable={true}
+            src={`/dice/die${dieNumber}.svg`}
+            className="logo"
+            alt="die logo ${dieNumber}"
+            onDrag={handleDiceRoll}
+          />
         </div>
       </Container>
-      <div style={{ position: "unset" }}>
-        <animated.img
-          style={props}
-          draggable={true}
-          src={`/dice/die${dieNumber}.svg`}
-          className="logo"
-          alt="die logo ${dieNumber}"
-          onDrag={handleDiceRoll}
-        />
-      </div>
     </>
   );
 }
