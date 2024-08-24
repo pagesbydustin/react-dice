@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useSpring, animated } from "react-spring";
 import { Container, Row, Col, Collapse } from "react-bootstrap";
+import SettingsOverlay from "./assets/componenents/SettingsOverlay";
+import SettingsLayout from "./assets/componenents/SettingsLayout";
 import "./App.css";
 import "./assets/bootstrap.css";
 
@@ -49,7 +51,8 @@ function App() {
   return (
     <>
       <Container
-        className="text-center mb-1 mt-1 bg-black rounded-5 bg-opacity-75"
+        hidden={true}
+        className="text-center mb-1 mt-1 p-2 bg-black rounded-5 bg-opacity-75"
         width={"1280px"}
       >
         <h1 className="text-white">Roll The Die</h1>
@@ -57,6 +60,7 @@ function App() {
       </Container>
 
       <Container
+        hidden={true}
         className="container-fluid bg-black bg-opacity-75 rounded-5 p-3"
         id="diceTable"
       >
@@ -69,6 +73,8 @@ function App() {
           onDrag={handleDiceRoll}
         />
       </Container>
+      <SettingsOverlay show={true}></SettingsOverlay>
+      <SettingsLayout></SettingsLayout>
     </>
   );
 }

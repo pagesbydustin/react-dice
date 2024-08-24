@@ -1,18 +1,11 @@
 /* 
 // Usage:
-const helperInstance = new Helper({
-  getRandom: () => true, // Your custom getRandom function
-  findOptimalSize: (randomNumber) => randomNumber * 2, // Your custom findOptimalSize function
+const helperInstance = new Helper();
+const random = helperInstance.getRandomNumber(1,10)
 }); */
 
 export default class Helper {
-  constructor(options = {}) {
-    this.getRandom =
-      options.getRandom || this.generateRandomNumber(option.min, options.max);
-    this.findOptimalSize = options.findOptimalSize;
-  }
-
-  generateRandomNumber(min, max) {
+  getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 }
