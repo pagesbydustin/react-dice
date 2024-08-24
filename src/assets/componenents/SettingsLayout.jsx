@@ -3,16 +3,17 @@ import { Button, Card, Col, Offcanvas, Row } from "react-bootstrap";
 import Helper from "../utils/Helper";
 
 function SettingsLayout() {
+  const [gameSettings, setGameSettings] = useState({
+    displayName: `Dragon Killer ${helps.getRandomNumber(3, 25)}`,
+  });
+
   const [show, setShow] = useState(true);
   const [randomNumber, setRandomNumber] = useState();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const helps = new Helper();
-  console.log(helps.getRandomNumber({ min: 6, max: 10 }));
-  const [gameSettings, setGameSettings] = useState({
-    displayName: `Dragon Killer ${helps.getRandomNumber({ min: 3, max: 25 })}`,
-  });
+  console.log(JSON.stringify(helps.getRandomNumber(6, 10)));
 
   return (
     <>
@@ -28,7 +29,7 @@ function SettingsLayout() {
           </Card.Header>
           <Card.Body>
             <Row>
-              <Col>Show this one</Col>
+              <Col className="str">Show this one</Col>
               <Col>Show this as well</Col>
             </Row>
           </Card.Body>
