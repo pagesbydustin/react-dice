@@ -2,14 +2,18 @@ import { useState } from "react";
 import { useSpring, animated } from "react-spring";
 import { Container, Row, Col, Collapse } from "react-bootstrap";
 import SettingsOverlay from "./assets/componenents/SettingsOverlay";
-import SettingsLayout from "./assets/componenents/SettingsLayout";
+import Helper from "./assets/utils/Helper";
 import "./App.css";
 import "./assets/bootstrap.css";
 
 function App() {
-  let newYValue = getRandomNumber(1, 4) * 100;
-  let newXValue = getRandomNumber(0, 12) * 100;
+  const Helps = new Helper();
 
+  let newYValue = Helps.getRandomNumber(1, 4) * 100;
+  let newXValue = Helps.getRandomNumber(0, 12) * 100;
+
+  const [gameStarted, setGameStarted] = useState(false);
+  sessionStorage.setItem("gameStarted", gameStarted);
   const [powerDieNumber, setPowerDieNumber] = useState(1);
   const [isRolling, setIsRolling] = useState(false);
   const [powerDieHome, setPowerDieHome] = useState({ x: 0, y: 0 });
@@ -24,7 +28,7 @@ function App() {
       mass: 6,
       tension: 1450,
       friction: 1000,
-      duration: getRandomNumber(300, 1500),
+      duration: Helps.getRandomNumber(300, 1500),
     },
   });
 
@@ -51,16 +55,15 @@ function App() {
   return (
     <>
       <Container
-        hidden={true}
+        hidden={gameStarted ? false : true}
         className="text-center mb-1 mt-1 p-2 bg-black rounded-5 bg-opacity-75"
         width={"1280px"}
       >
         <h1 className="text-white">Roll The Die</h1>
         <p>Drag to the right and let go to roll the die!</p>
       </Container>
-
       <Container
-        hidden={true}
+        hidden={gameStarted ? false : true}
         className="container-fluid bg-black bg-opacity-75 rounded-5 p-3"
         id="diceTable"
       >
@@ -73,8 +76,7 @@ function App() {
           onDrag={handleDiceRoll}
         />
       </Container>
-      <SettingsOverlay show={true}></SettingsOverlay>
-      <SettingsLayout></SettingsLayout>
+      <SettingsOverlay></SettingsOverlay>
     </>
   );
 }

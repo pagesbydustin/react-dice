@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, CloseButton, Col, Form, Modal, Row } from "react-bootstrap";
+import SettingsLayout from "./SettingsLayout";
 
 function SettingsOverlay() {
   const [show, setShow] = useState(true);
@@ -24,46 +25,19 @@ function SettingsOverlay() {
         animation={true}
         show={show}
         backdrop={"static"}
+        centered
       >
-        <Modal.Header>
-          Game Settings
+        <Modal.Header className="text-light">
+          Flotzzy Settings
           <CloseButton onClick={handleOpenClose} />
         </Modal.Header>
 
         <Modal.Body>
-          <Row
-            id="question-1"
-            className="justify-content-start align-items-center"
-          >
-            <Col lg={8}>
-              <Form.Label>What is your Gamer Tag?</Form.Label>
-            </Col>
-          </Row>
-          <Row
-            id="answer-1"
-            className="justify-content-center align-items-center"
-          >
-            <Col lg={8}>
-              <Form.Control
-                type="text"
-                role="button"
-                placeholder="FireStorm2323"
-              />
-            </Col>
-            <Col lg={4}>
-              <Button variant="primary" onClick={handleData}>
-                Submit
-              </Button>
-            </Col>
-          </Row>
+          <SettingsLayout></SettingsLayout>
         </Modal.Body>
       </Modal>
 
-      <Button
-        variant="primary"
-        onClick={handleOpenClose}
-        className="text-center"
-      >
+      <Button variant="dark" onClick={handleOpenClose} className="text-center">
         Show Settings
       </Button>
     </>
