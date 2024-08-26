@@ -1,128 +1,78 @@
-import { useState } from "react";
-import { Container, Form, Row, Col } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Container, Form, Row, Col, Button } from "react-bootstrap";
 import Helper from "../utils/Helper";
 
-import {
-  RiAccountBoxFill,
-  RiProfileFill,
-  RiQuestionFill,
-  RiTimeFill,
-} from "react-icons/ri";
+import { RiAccountBoxFill, RiCheckFill } from "react-icons/ri";
 
-export default function SettingsLayout() {
+export default function SettingsLayout(props) {
   const Helps = new Helper();
+
   const randomNumber100to200 = Helps.getRandomNumber(100, 200);
   const defaultGamerTag = `Dragon_Slayer_${randomNumber100to200}`;
-
-  const [gameSettings, setGameSettings] = useState({
+  const [formData, setFormData] = useState({
     gamerTag: defaultGamerTag,
-    showRules: true,
-    bestScore: 0,
+    persistantScore: false,
     timer: false,
   });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newSettings = new FormData(e.target);
+    const settingsData = Object.fromEntries(newSettings);
+    const updatedSettingsData = {
+      ...settingsData,
+      gamerTag: settingsData.gamerTag || defaultGamerTag,
+      persistantScore: settingsData.persistantScore == "on" ? true : false,
+      timer: settingsData.timer == "on" ? true : false,
+    };
+
+    props.onClose();
+    props.onSettingsChange(updatedSettingsData);
+  };
 
   return (
     <Container className="text-light">
-      <Form>
+      <Form name={"settingsForm"} onSubmit={handleSubmit}>
         <Row className="p-2">
           <Col>
             <Form.Label className="fw-bold">
-              <RiAccountBoxFill size={20} /> - What is your Gamer Tag?
+              What is your Gamer Tag? <RiAccountBoxFill size={20} />
             </Form.Label>
-
+          </Col>
+        </Row>
+        <Row className="p-2">
+          <Col>
             <Form.Control
-              defaultValue={gameSettings.gamerTag}
+              defaultValue={defaultGamerTag}
               type="input"
-              placeholder={gameSettings.gamerTag}
+              placeholder={defaultGamerTag}
               id="GamerTag"
+              name="gamerTag"
             ></Form.Control>
           </Col>
         </Row>
-
         <Row className="p-2">
+          <Form.Label className="fw-bold">
+            <RiCheckFill size={20} /> - Check to turn options on.
+          </Form.Label>
+        </Row>
+        <Row>
           <Col>
-            <Form.Label className="fw-bold">
-              <RiQuestionFill size={20} /> - Have you played before?
-            </Form.Label>
+            <Form.Check
+              label="Persistant Score"
+              name="persistantScore"
+              type="switch"
+            />
+          </Col>
+          <Col>
+            <Form.Check label="Timer" name="timer" type="switch" />
           </Col>
         </Row>
-        <Row className="p-2">
+        <Row>
           <Col>
-            <Form.Check
-              id="played-chk-yes"
-              className="text-start"
-              label="Yes"
-              type="radio"
-              name="g1"
-            ></Form.Check>
+            <Button type="submit">Save</Button>
           </Col>
           <Col>
-            <Form.Check
-              id="played-chk-no"
-              className="text-start"
-              label="No"
-              type="radio"
-              name="g1"
-              defaultChecked
-            ></Form.Check>
-          </Col>
-        </Row>
-        <Row className="p-2">
-          <Col>
-            <Form.Label className="fw-bold">
-              <RiProfileFill size={20} /> - Would you like to keep your best
-              score?
-            </Form.Label>
-          </Col>
-        </Row>
-        <Row className="p-2">
-          <Col>
-            <Form.Check
-              id="keep-score-chk-yes"
-              className="text-start"
-              label="Yes"
-              type="radio"
-              name="g2"
-            ></Form.Check>
-          </Col>
-          <Col>
-            <Form.Check
-              id="keep-score-chk-no"
-              className="text-start"
-              label="No"
-              type="radio"
-              name="g2"
-              defaultChecked
-            ></Form.Check>
-          </Col>
-        </Row>
-        <Row className="p-2">
-          <Col>
-            <Form.Label className="fw-bold">
-              <RiTimeFill clas size={20} /> - Would you like to turn on timer?
-            </Form.Label>
-          </Col>
-        </Row>
-        <Row className="p-2">
-          <Col>
-            <Form.Check
-              disabled
-              id="keep-score-chk-yes"
-              className="text-start"
-              label="Yes"
-              type="radio"
-              name="g3"
-            ></Form.Check>
-          </Col>
-          <Col>
-            <Form.Check
-              id="keep-score-chk-no"
-              className="text-start"
-              label="No"
-              type="radio"
-              name="g3"
-              defaultChecked
-            ></Form.Check>
+            <Button type="reset">Reset</Button>
           </Col>
         </Row>
       </Form>

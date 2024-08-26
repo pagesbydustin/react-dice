@@ -1,20 +1,49 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useSpring, animated } from "react-spring";
-import { Container, Row, Col, Collapse } from "react-bootstrap";
+import { Container } from "react-bootstrap";
+
 import SettingsOverlay from "./assets/componenents/SettingsOverlay";
 import Helper from "./assets/utils/Helper";
+
 import "./App.css";
 import "./assets/bootstrap.css";
 
+/**
+ * @component App
+ * No props found for this component.
+ */
 function App() {
-  const Helps = new Helper();
+  const Helps = new Helper(); //Helper Class initiation
+
+  /**
+   * Game Settings object is set based on existance of storage for gamerTag in the browser.
+   */
+
+  const [gameSettings, setGameSettings] = useState({
+    gamerTag: "DragonSlayer123",
+    persistantScore: false,
+    timer: false,
+  });
+
+  const handleSettingsChange = (newSettings) => {
+    setGameSettings(newSettings);
+    localStorage.setItem(
+      `${newSettings.gamerTag}-gameSettings`,
+      JSON.stringify(newSettings)
+    );
+  };
 
   let newYValue = Helps.getRandomNumber(1, 4) * 100;
   let newXValue = Helps.getRandomNumber(0, 12) * 100;
 
-  const [gameStarted, setGameStarted] = useState(false);
-  sessionStorage.setItem("gameStarted", gameStarted);
+  const [gameStarted, setGameStarted] = useState(
+    sessionStorage.getItem("gameStarted") || true
+  );
+
+  //const [] = useContext();
+
   const [powerDieNumber, setPowerDieNumber] = useState(1);
+
   const [isRolling, setIsRolling] = useState(false);
   const [powerDieHome, setPowerDieHome] = useState({ x: 0, y: 0 });
 
@@ -33,12 +62,10 @@ function App() {
   });
 
   function handleDiceRoll(e) {
-    console.log(newXValue, newYValue);
-
     setPowerDieNumber(0);
 
     setIsRolling(true);
-    const newDieNumber = getRandomNumber(1, 6);
+    const newDieNumber = Helps.getRandomNumber(1, 6);
 
     setTimeout(() => {
       setPowerDieNumber(newDieNumber);
@@ -48,10 +75,10 @@ function App() {
     return newDieNumber;
   }
 
-  function getRandomNumber(min, max) {
+  /* function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
-
+ */
   return (
     <>
       <Container
@@ -76,7 +103,7 @@ function App() {
           onDrag={handleDiceRoll}
         />
       </Container>
-      <SettingsOverlay></SettingsOverlay>
+      <SettingsOverlay onSettingsChange={handleSettingsChange} />
     </>
   );
 }

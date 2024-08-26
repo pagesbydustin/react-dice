@@ -2,22 +2,13 @@ import { useState } from "react";
 import { Button, CloseButton, Col, Form, Modal, Row } from "react-bootstrap";
 import SettingsLayout from "./SettingsLayout";
 
-function SettingsOverlay() {
-  const [show, setShow] = useState(true);
+function SettingsOverlay(props) {
+  const [show, setShow] = useState(false);
 
   function handleOpenClose() {
     setShow(!show);
   }
 
-  function handleData(e) {
-    e.preventDefault();
-
-    handleOpenClose();
-  }
-
-  function handleInputChange(e) {
-    console.log(e.target.value);
-  }
   return (
     <>
       <Modal
@@ -26,6 +17,7 @@ function SettingsOverlay() {
         show={show}
         backdrop={"static"}
         centered
+        size={"lg"}
       >
         <Modal.Header className="text-light">
           Flotzzy Settings
@@ -33,7 +25,11 @@ function SettingsOverlay() {
         </Modal.Header>
 
         <Modal.Body>
-          <SettingsLayout></SettingsLayout>
+          <SettingsLayout
+            showing={show}
+            onSettingsChange={props.onSettingsChange}
+            onClose={handleOpenClose}
+          />
         </Modal.Body>
       </Modal>
 
