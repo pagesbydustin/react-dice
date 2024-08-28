@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSpring, animated } from "react-spring";
 
-function dieComponent({ powerDie }) {
+function DieComponent({ powerDie }) {
   const [powerDieNumber, setPowerDieNumber] = useState(1);
   const [isRolling, setIsRolling] = useState(false);
   const [powerDieHome, setPowerDieHome] = useState({ x: 0, y: 0 });
@@ -46,4 +46,4 @@ function dieComponent({ powerDie }) {
   );
 }
 
-export default dieComponent;
+export default DieComponent;
