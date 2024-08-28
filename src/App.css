@@ -9,7 +9,9 @@
   height: 600px;
   width: 1280px;
 }
-
+#OCDescription{
+  min-width: 300px;
+}
 
 .die {
 

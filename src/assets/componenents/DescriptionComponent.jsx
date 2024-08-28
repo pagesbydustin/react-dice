@@ -16,7 +16,7 @@ function DescriptionComponent() {
       <Button variant="dark" onClick={handleOpen}>
         Open rules and settings desciption
       </Button>
-      <Offcanvas className="w-50" show={show} onHide={handleClose}>
+      <Offcanvas id="OCDescription" className="w-50" show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>{DataFile.GameName}</Offcanvas.Title>
         </Offcanvas.Header>
