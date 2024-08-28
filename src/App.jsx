@@ -1,12 +1,13 @@
 import { useContext, useState } from "react";
 import { useSpring, animated } from "react-spring";
-import { Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 
 import SettingsOverlay from "./assets/componenents/SettingsOverlay";
 import Helper from "./assets/utils/Helper";
 
 import "./App.css";
 import "./assets/bootstrap.css";
+import DescriptionComponent from "./assets/componenents/DescriptionComponent";
 
 /**
  * @component App
@@ -103,7 +104,14 @@ function App() {
           onDrag={handleDiceRoll}
         />
       </Container>
-      <SettingsOverlay onSettingsChange={handleSettingsChange} />
+      <Row className="p-2">
+        <Col className="text-center align-content-center align-items-center">
+          <SettingsOverlay onSettingsChange={handleSettingsChange} />
+        </Col>
+        <Col className="text-center align-content-center align-items-center">
+          <DescriptionComponent />
+        </Col>
+      </Row>
     </>
   );
 }

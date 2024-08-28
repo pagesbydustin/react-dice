@@ -1,4 +1,4 @@
-function dieTableComponent() {
+function DieTableComponent() {
   return (
     <>
       <Container
@@ -26,4 +26,4 @@ function dieTableComponent() {
   );
 }
 
-export default dieTableComponent;
+export default DieTableComponent;
