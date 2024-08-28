@@ -83,6 +83,7 @@ function App() {
   return (
     <>
       <Container
+        id="diceTableHeading"
         hidden={gameStarted ? false : true}
         className="text-center mb-1 mt-1 p-2 bg-black rounded-5 bg-opacity-75"
         width={"1280px"}

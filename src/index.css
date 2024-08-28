@@ -2,13 +2,19 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: block;
+
+
+/**
+Custom css var names
+*/
+
+  --min-slideout-width: 500px;
+
 }
 
 a {
@@ -23,15 +29,15 @@ a:hover {
 body {
   margin: 0;
   display: block;
-  /**place-items: center;*/
   min-width: 320px;
   min-height: 100vh;
   background-color: #19003ab6 !important ;
   background-image: url("/Dragon.jpg") !important;
   background-repeat: repeat-x;
-  background-size: 120vw;
-  background-position: top;
-  background-position-y: -300px;  color: rgba(255, 255, 255, 0.87);
+  background-size: 2000px auto;
+  background-position: center top;
+
+  color: rgba(255, 255, 255, 0.87);
 }
 
 h1 {
@@ -39,13 +45,4 @@ h1 {
   line-height: 1.1;
 }
 
-button {
-  border-radius: 8px;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  cursor: pointer;
-}
-button:hover {
-  border-color: #010bca;
-}
+

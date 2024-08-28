@@ -1,4 +1,6 @@
+
 #root {
+
   width: 1280px;
   margin: auto;
   padding:0px 0px 0px 0px;
@@ -7,10 +9,14 @@
 
 #diceTable{
   height: 600px;
-  width: 1280px;
+  min-width: 1280px !important;
+  width: 1280px !important;
+}
+#diceTableHeading{
+  min-width: 1280px !important;
 }
 #OCDescription{
-  min-width: 300px;
+  min-width: var(--min-slideout-width); 
 }
 
 .die {
