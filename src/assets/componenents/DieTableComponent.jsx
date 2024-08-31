@@ -1,4 +1,4 @@
-function DieTableComponent() {
+function DieTableComponent(props) {
   return (
     <>
       <Container
@@ -14,7 +14,7 @@ function DieTableComponent() {
         id="diceTable"
       >
         <animated.img
-          style={props}
+          style={props.styles || ""}
           draggable={true}
           src={`/dice/die${powerDieNumber}.svg`}
           className="die"

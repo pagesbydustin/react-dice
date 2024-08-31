@@ -13,6 +13,7 @@ export default function SettingsLayout(props) {
     gamerTag: defaultGamerTag,
     persistantScore: false,
     timer: false,
+    round: 0,
   });
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,6 +24,7 @@ export default function SettingsLayout(props) {
       gamerTag: settingsData.gamerTag || defaultGamerTag,
       persistantScore: settingsData.persistantScore == "on" ? true : false,
       timer: settingsData.timer == "on" ? true : false,
+      round: 0,
     };
 
     props.onClose();
@@ -65,6 +67,11 @@ export default function SettingsLayout(props) {
           </Col>
           <Col>
             <Form.Check label="Timer" name="timer" type="switch" />
+          </Col>
+          <Col>
+            <Form.Text>
+              {localStorage.getItem("dodo-gameSettings").round}
+            </Form.Text>
           </Col>
         </Row>
         <Row>
