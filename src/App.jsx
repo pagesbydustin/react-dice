@@ -4,14 +4,14 @@ import { Col, Container, Row, Spinner } from "react-bootstrap";
 
 import SettingsOverlay from "./assets/componenents/SettingsOverlay";
 import Helper from "./assets/utils/Helper";
-import Game from "./assets/utils/Game";
+/*import Game from "./assets/utils/Game";*/
 
 import "./App.css";
 import "./assets/bootstrap.css";
 import DescriptionComponent from "./assets/componenents/DescriptionComponent";
 
 function App() {
-  const GameInit = new Game();
+  /*const GameInit = new Game();*/
 
   const Helps = new Helper(); //Helper Class initiation
 
