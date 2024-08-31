@@ -69,9 +69,7 @@ export default function SettingsLayout(props) {
             <Form.Check label="Timer" name="timer" type="switch" />
           </Col>
           <Col>
-            <Form.Text>
-              {localStorage.getItem("dodo-gameSettings").round}
-            </Form.Text>
+            <Form.Text>Round</Form.Text>
           </Col>
         </Row>
         <Row>
