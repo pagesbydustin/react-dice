@@ -1,12 +1,5 @@
 import { useState } from "react";
-import {
-  Accordion,
-  Button,
-  Col,
-  Container,
-  Offcanvas,
-  Row,
-} from "react-bootstrap";
+import { Accordion, Button, Container, Offcanvas } from "react-bootstrap";
 import DataFile from "../data/RulesAndSettingsData.json";
 function DescriptionComponent() {
   const [show, setShow] = useState(false);

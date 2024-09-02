@@ -29,6 +29,7 @@ function SettingsOverlay(props) {
             showing={show}
             onSettingsChange={props.onSettingsChange}
             onClose={handleOpenClose}
+            gamerTag={props.gamerTag}
           />
         </Modal.Body>
       </Modal>

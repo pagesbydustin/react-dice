@@ -1,6 +1,16 @@
 import { useState, useEffect } from "react";
 import { useSpring, animated } from "react-spring";
-import { Col, Container, Row, Spinner } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Col,
+  Container,
+  Form,
+  Row,
+  Spinner,
+} from "react-bootstrap";
+
+import useLocalStorageState from "use-local-storage-state";
 
 import SettingsOverlay from "./assets/componenents/SettingsOverlay";
 import Helper from "./assets/utils/Helper";
@@ -15,7 +25,7 @@ function App() {
 
   const Helps = new Helper(); //Helper Class initiation
 
-  const [gameSettings, setGameSettings] = useState({
+  const [gameSettings, setGameSettings] = useLocalStorageState({
     gamerTag: "DragonSlayer123",
     persistantScore: false,
     timer: false,
@@ -23,12 +33,19 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(true); // State to track loading status
 
+  const [gamerTag, setGamerTag] = useState();
+
+  function handleGamerTagInit(e) {
+    e.preventDefault();
+    let gTag = e.target.gamerTagInput.value;
+    setGamerTag(gTag);
+    setGameStarted(!gameStarted);
+    setIsLoading(!isLoading);
+  }
+
   useEffect(() => {
-    // Simulate loading delay (replace with your actual loading logic)
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-  }, []);
+    console.log("Gamer Tag: %s", gamerTag);
+  }, [gamerTag]);
 
   /**
    * When settings change this handles the save to storage
@@ -91,12 +108,33 @@ function App() {
           <Spinner animation="border" role="status">
             <span className="visually-hidden">Loading...</span>
           </Spinner>
+          <Container fluid>
+            <Card>
+              <Card.Header>What is your Gamer Tag?</Card.Header>
+              <Card.Body>
+                <Form onSubmit={handleGamerTagInit}>
+                  <Row>
+                    <Col>
+                      <Form.Control
+                        name="gamerTagInput"
+                        type="input"
+                        placeholder="Gamer Tag"
+                      />
+                    </Col>
+                    <Col lg={2}>
+                      <Button type="submit">Start Game</Button>
+                    </Col>
+                  </Row>
+                </Form>
+              </Card.Body>
+            </Card>
+          </Container>
         </Container>
       ) : (
         <>
           <Container
             id="diceTableHeading"
-            hidden={gameStarted ? false : true}
+            hidden={gameStarted ? true : false}
             className="text-center mb-1 mt-1 p-2 bg-black rounded-5 bg-opacity-75"
             width={"1280px"}
           >
@@ -104,7 +142,7 @@ function App() {
             <p>Drag to the right and let go to roll the die!</p>
           </Container>
           <Container
-            hidden={gameStarted ? false : true}
+            hidden={gameStarted ? true : false}
             className="container-fluid bg-black bg-opacity-75 rounded-5 p-3"
             id="diceTable"
           >
@@ -119,7 +157,10 @@ function App() {
           </Container>
           <Row className="p-2">
             <Col className="text-center align-content-center align-items-center">
-              <SettingsOverlay onSettingsChange={handleSettingsChange} />
+              <SettingsOverlay
+                onSettingsChange={handleSettingsChange}
+                gamerTag={gamerTag}
+              />
             </Col>
             <Col className="text-center align-content-center align-items-center">
               <DescriptionComponent />
