@@ -162,7 +162,7 @@ function App() {
               <animated.img
                 style={props}
                 draggable={true}
-                src={`/dice/die${powerDieNumber}.svg`}
+                src={`/dice/die${powerDieNumber}.png`}
                 className="die"
                 alt="die logo ${powerDieNumber}"
                 onDrag={handleDiceRoll}
