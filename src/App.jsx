@@ -19,6 +19,8 @@ import Helper from "./assets/utils/Helper";
 import "./App.css";
 import "./assets/bootstrap.css";
 import DescriptionComponent from "./assets/componenents/DescriptionComponent";
+import DieComponent from "./assets/componenents/DieComponent";
+import DieTableComponent from "./assets/componenents/DieTableComponent";
 
 function App() {
   /*const GameInit = new Game();*/
@@ -132,7 +134,7 @@ function App() {
         </Container>
       ) : (
         <>
-          <Container
+          {/* <Container
             id="diceTableHeading"
             hidden={gameStarted ? true : false}
             className="text-center mb-1 mt-1 p-2 bg-black rounded-5 bg-opacity-75"
@@ -154,7 +156,19 @@ function App() {
               alt="die logo ${powerDieNumber}"
               onDrag={handleDiceRoll}
             />
-          </Container>
+          </Container> */}
+          <DieTableComponent
+            dice={
+              <animated.img
+                style={props}
+                draggable={true}
+                src={`/dice/die${powerDieNumber}.svg`}
+                className="die"
+                alt="die logo ${powerDieNumber}"
+                onDrag={handleDiceRoll}
+              />
+            }
+          />
           <Row className="p-2">
             <Col className="text-center align-content-center align-items-center">
               <SettingsOverlay

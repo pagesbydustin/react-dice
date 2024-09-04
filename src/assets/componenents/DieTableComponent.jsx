@@ -1,4 +1,10 @@
+import { useState } from "react";
+import { Container } from "react-bootstrap";
+import DieComponent from "./DieComponent";
+import { animated } from "react-spring";
+
 function DieTableComponent(props) {
+  let properties = { ...props };
   return (
     <>
       <Container
@@ -13,14 +19,7 @@ function DieTableComponent(props) {
         className="container-fluid bg-black bg-opacity-75 rounded-5 p-3"
         id="diceTable"
       >
-        <animated.img
-          style={props.styles || ""}
-          draggable={true}
-          src={`/dice/die${powerDieNumber}.svg`}
-          className="die"
-          alt="die logo ${powerDieNumber}"
-          onDrag={handleDiceRoll}
-        />
+        <DieComponent Die={properties.dice} />
       </Container>
     </>
   );
