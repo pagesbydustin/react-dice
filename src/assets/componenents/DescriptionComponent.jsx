@@ -32,7 +32,7 @@ function DescriptionComponent() {
             <Accordion>
               <Accordion.Item eventKey={0}>
                 <Accordion.Header>Dice</Accordion.Header>
-                <Accordion.Body>{DataFile.Rules["Dice"]}</Accordion.Body>
+                <Accordion.Body>{DataFile.Rules.Dice}</Accordion.Body>
               </Accordion.Item>
               <Accordion.Item eventKey={1}>
                 <Accordion.Header>Rolling The Dice</Accordion.Header>
@@ -42,7 +42,7 @@ function DescriptionComponent() {
               </Accordion.Item>
               <Accordion.Item eventKey={2}>
                 <Accordion.Header>Winning</Accordion.Header>
-                <Accordion.Body>{DataFile.Rules["How to win"]}</Accordion.Body>
+                <Accordion.Body>{DataFile.Rules["How to Win"]}</Accordion.Body>
               </Accordion.Item>
             </Accordion>
           </Container>
@@ -58,7 +58,7 @@ function DescriptionComponent() {
               <Accordion.Item eventKey={1}>
                 <Accordion.Header>Persistant Score</Accordion.Header>
                 <Accordion.Body>
-                  {DataFile.Settings["Persistant Score"]}
+                  {DataFile.Settings["Persistent Score"]}
                 </Accordion.Body>
               </Accordion.Item>
               <Accordion.Item eventKey={2}>

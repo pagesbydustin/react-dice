@@ -1,15 +1,15 @@
 {
-    "GameName": "Flotzzy, By Dustin LLC",
+    "GameName": "Flotzzy, by Dustin LLC",
     "Settings": {
-        "GamerTag": "The GamerTag is your id for the game. It is used for knowing who is playing to default your settings.",
-        "Persistant Score": "Keeps your highest score over time, if you use the same Gamer Tag it will follow you anywhere you play the game.",
-        "Timer": "Set the timer and save your time with the best score, if this is turned off the timer will not run or save a time if you get a savable high score.",
-        "Rounds": "This setting is the number of rounds before gameplay ends.",
-        "Number of Players": "1, 2, 4, 6, 8 are the options for now but the single player option is the only one implemented as of now so the other options will be disabled until the game is done."
+        "GamerTag": "Your unique identifier for the game. It's used to personalize your settings and track your progress.",
+        "Persistent Score": "Keeps track of your highest score over time. If you use the same GamerTag, your score will follow you wherever you play the game.",
+        "Timer": "When enabled, this setting runs a timer and saves your best time along with your highest score. If disabled, no time will be recorded for high scores.",
+        "Rounds": "Determines the number of rounds before the game ends.",
+        "Number of Players": "Options include 1, 2, 4, 6, or 8 players. Currently, only single-player mode is implemented; other options will be disabled until multiplayer is fully developed."
     },
     "Rules": {
-        "Dice": "There are 6 dice in total. A single die has all six sides representing a number of 1 - 6 using dots or 'Pips' with each opisite side adding up to seven. (Example #1 - 1 is oposite 6, 1 - 6 = 7. Example #2 - 2 is opisite 5, 2 + 5 = 7 and this continues with 3 and 4). This die is going to be the die the player rolls first on every turn to determine the number of dice they need to get a pip in there turn to get a point. 1-5 are all numbers of dice to get a point but the six is a wild card and the player may choose any number 1-5 to try and get a point. The remaining 5 dice are blank on 5 sides with the number 1 side being the only pip on the die. These dice will be rolled to try and get the number of pips shown in the first die.",
-        "Rolling the Dice": "On a players turn the will throw the single die with 6 sides haveing numbers. If this die lands on 1 - 5 that is the number of die you need to land having a single pip showing on top. If the die lands on 6 you may choose any number 1 - 6 to be your number to get a point. The player now rolls all five single pip dice and the dice that have a single pip on top will be removed from the rolling dice, the player then rolls the remianing dice until either the round is over or they reach the number of pips they need to get a point. After the the player gets the point the round is over. even if they have more rolls available. One point per round is all any player can get, so rolling after getting the point does nothing.",
-        "How to win": "The player with the most points after the number of rounds in settings is is the winner if multiple people are playing (Not available at this time) or when playing against the scoreboard the player will try to beat the clock or best score set by the gamer tag."
+        "Dice": "The game uses 6 dice in total. One die has six numbered sides (1-6), represented by dots or 'pips'. On this die, opposite sides always sum to 7 (e.g., 1 is opposite 6, 2 is opposite 5, etc.). This die is rolled first on each turn to determine how many pips the player needs to score a point. Rolling a 1-5 sets that as the target, while a 6 is wild, allowing the player to choose any number from 1-5 as their target. The other 5 dice are blank on 5 sides, with only the '1' side showing a pip. These dice are rolled to try and match the number shown on the first die.",
+        "Rolling the Dice": "On each turn, the player first rolls the numbered die. The result (1-5) determines how many pips they need to score a point. If a 6 is rolled, the player can choose any number from 1-5 as their target. Next, the player rolls all five single-pip dice. Any dice showing a pip are set aside, and the remaining dice are re-rolled. This continues until either the round ends or the player achieves their target number of pips to score a point. Once a point is scored, the round ends immediately, even if more rolls were available. Only one point can be scored per round.",
+        "How to Win": "In multiplayer mode (not currently available), the player with the most points after the set number of rounds wins. In single-player mode, the goal is to beat the clock or achieve the best score associated with your GamerTag."
     }
 }
