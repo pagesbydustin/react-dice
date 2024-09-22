@@ -1,24 +1,26 @@
 import { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 
-function ScoreBoardComponent({ name }) {
+function ScoreBoardComponent({ name, scoreInput }) {
   // Initialize player with default values
-  const [player, setPlayer] = useState({ name: name, score: 0 });
-  const [score, setScore] = useState(0); // Use state for total score
+  const [player, setPlayer] = useState({ name: name || "DragonSlayer2024" });
+  const [score, setScore] = useState(scoreInput); // Use state for total score
 
   // Update score function (optional)
-  const updateScore = (delta) => {
-    setScore(score + delta); // Update total score
+  const updateScore = (points) => {
+    setScore(score + points); // Update total score
   };
 
   return (
     <>
-      <Container className="container-fluid">
+      <Container className="container-fluid scoreboardContainer">
         <h1 className="text-center">Scoreboard</h1>
         <hr className="w-100" />
-        <Row as="h3">
-          <Col>{player.name} - </Col>
-          <Col>{score}</Col>
+        <Row>
+          <Col as="h3" className="alignRight">
+            {player.name} -{" "}
+          </Col>
+          <Col as="h3">{score}</Col>
         </Row>
       </Container>
     </>

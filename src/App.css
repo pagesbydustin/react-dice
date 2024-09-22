@@ -1,32 +1,38 @@
-
 #root {
 
-  width: 1280px;
+  width: 90vw;
   margin: auto;
-  padding:0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
 
 }
 
-#diceTable{
+#diceTable {
   height: 600px;
-  min-width: 1280px !important;
-  width: 1280px !important;
+
 }
-#diceTableHeading{
-  min-width: 1280px !important;
-}
-#OCDescription{
-  min-width: var(--min-slideout-width); 
+
+
+
+#OCDescription {
+  min-width: var(--min-slideout-width);
 }
 
 .die {
-
+  width: 10%;
   padding: 1.5em;
   filter: drop-shadow(0 0 2em #6a07db7c);
 
 }
+
 .die:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
 
+.alignRight {
+  text-align: right;
+}
 
+.scoreboardContainer {
+  background-color: #000000a6;
+  border-radius: 32px;
+}

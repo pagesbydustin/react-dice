@@ -9,7 +9,7 @@
   display: block;
 
 
-/**
+  /**
 Custom css var names
 */
 
@@ -22,6 +22,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -31,12 +32,13 @@ body {
   display: block;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #19003ab6 !important ;
+  background-color: #19003ab6 !important;
   background-image: url("/Dragon.jpg") !important;
   background-repeat: repeat-x;
   background-size: 2000px auto;
   background-position: center top;
-
+  align-content: center;
+  align-items: center;
   color: rgba(255, 255, 255, 0.87);
 }
 
@@ -44,5 +46,3 @@ h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
-
-

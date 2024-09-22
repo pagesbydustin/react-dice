@@ -19,8 +19,9 @@ import Helper from "./assets/utils/Helper";
 import "./App.css";
 import "./assets/bootstrap.css";
 import DescriptionComponent from "./assets/componenents/DescriptionComponent";
-import DieComponent from "./assets/componenents/DieComponent";
+
 import DieTableComponent from "./assets/componenents/DieTableComponent";
+import ScoreBoardComponent from "./assets/componenents/ScoreBoardComponent";
 
 function App() {
   /*const GameInit = new Game();*/
@@ -102,14 +103,19 @@ function App() {
     return newDieNumber;
   }
 
+  const [isEmpty, setIsEmpty] = useLocalStorageState("isEmpty", true);
+  function changeInputStatus(e) {
+    console.log(e.target.value);
+
+    if (e.target.value !== "") {
+      setIsEmpty(!isEmpty);
+    }
+  }
   return (
     <>
       {isLoading ? (
         // Show loading spinner while isLoading is true
         <Container className="text-center align-content-center align-items-center">
-          <Spinner animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </Spinner>
           <Container fluid>
             <Card>
               <Card.Header>What is your Gamer Tag?</Card.Header>
@@ -121,10 +127,19 @@ function App() {
                         name="gamerTagInput"
                         type="input"
                         placeholder="Gamer Tag"
+                        onChange={changeInputStatus}
                       />
                     </Col>
-                    <Col lg={2}>
-                      <Button type="submit">Start Game</Button>
+                    <Col sm={2} md={2} lg={2}>
+                      {isEmpty ? (
+                        <Button type="submit">Start</Button>
+                      ) : (
+                        <Button type="button">
+                          <Spinner animation="border" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                          </Spinner>
+                        </Button>
+                      )}
                     </Col>
                   </Row>
                 </Form>
@@ -134,30 +149,40 @@ function App() {
         </Container>
       ) : (
         <>
-          <DieTableComponent
-            dice={
-              <animated.img
-                style={props}
-                draggable={true}
-                onTouchMove={handleDiceRoll}
-                src={`/dice/die${powerDieNumber}.png`}
-                className="die"
-                alt="die logo ${powerDieNumber}"
-                onDrag={handleDiceRoll}
-              />
-            }
-          />
-          <Row className="p-2">
-            <Col className="text-center align-content-center align-items-center">
-              <SettingsOverlay
-                onSettingsChange={handleSettingsChange}
-                gamerTag={gamerTag}
-              />
-            </Col>
-            <Col className="text-center align-content-center align-items-center">
-              <DescriptionComponent />
-            </Col>
-          </Row>
+          <Container fluid>
+            <Row>
+              <Col>
+                <DieTableComponent
+                  dice={
+                    <animated.img
+                      style={props}
+                      draggable={true}
+                      onTouchMove={handleDiceRoll}
+                      src={`/dice/die${powerDieNumber}.png`}
+                      className="die"
+                      alt="die logo ${powerDieNumber}"
+                      onDrag={handleDiceRoll}
+                    />
+                  }
+                />
+              </Col>
+            </Row>
+          </Container>
+          <Container fluid>
+            <Row className="p-2">
+              <Col className="text-center align-content-center align-items-center">
+                <SettingsOverlay
+                  onSettingsChange={handleSettingsChange}
+                  gamerTag={gamerTag}
+                />
+              </Col>
+              <Col className="text-center align-content-center align-items-center">
+                <DescriptionComponent />
+              </Col>
+            </Row>
+          </Container>
+
+          <ScoreBoardComponent name={gamerTag} scoreInput={0} />
         </>
       )}
     </>
