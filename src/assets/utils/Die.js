@@ -29,7 +29,7 @@ export class Die {
    * @readonly
    * @type {{ x: number; y: number; }}
    */
-  get homeCoords() {
+  getHomeCoords() {
     return { x: this._homeX, y: this._homeY };
   }
 
@@ -39,17 +39,17 @@ export class Die {
    * @readonly
    * @type {boolean}
    */
-  get isPowerDie() {
+  getIsPowerDie() {
     return this._powerDie;
   }
-
+  
   /**
    * ID takes no paramiters and returns the ID of the die
    *
    * @readonly
    * @type {number}
    */
-  get ID() {
+  getID() {
     return this._dieID;
   }
 }

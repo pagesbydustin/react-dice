@@ -1,35 +1,64 @@
-import { nanoid } from "nanoid";
-
 export default class Game {
   constructor() {
-    this.gameID;
-    this.gameRound;
-    this.gameStarted = false;
+    this.gameID = this.generateCustomID(16);
+    this.gameRound = 0;
+    this.isStarted = false;
+    this.players = [];
+    this.currentPlayerIndex = 0;
+    this.gameState = 'starting';
+    this.timer = false;
   }
-  /**
-   * set game id
-   * @param {number} int
-   */
-  set gameID(int) {
-    this.gameID = nanoid(16);
-  }
-
-  /** get game id */
-  get gameID() {
-    return this.gameID;
-  }
-
-  /**
-   * set game round
-   *
-   * @param {number} round
-   */
-  set gameRound(round) {
-    this.gameRound = round || 0;
+  startGame() {
+    if (!this.isStarted) {
+      this.isStarted = true;
+      this.gameState = 'playing';
+      this.currentPlayerIndex = 0;
+      this.players[this.currentPlayerIndex].startTurn();
+    }
   }
 
-  /** get game round */
-  get gameRound() {
-    return this.gameRound;
+  nextPlayer() {
+    this.currentPlayerIndex++;
+    if (this.currentPlayerIndex >= this.players.length) {
+      this.currentPlayerIndex = 0;
+    }
+    this.players[this.currentPlayerIndex].startTurn();
+
   }
+
+  generateCustomID(length = 10) {
+    const characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+";
+    let id = "";
+
+    for (let i = 0; i < length; i++) {
+      id += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+
+    return id;
+  }
+  startGame() {
+    if (!this.isStarted) {
+      this.isStarted = true;
+      this.gameState = 'playing';
+    }
+  }
+
+  handlePlayerAction(player, action) {
+    switch (action) {
+      case "roll":
+        if (player === this.players[this.currentPlayerIndex]) {
+          player.rollDice();
+          if (!player.isRolling) {
+            this.nextPlayer();
+          }
+        }
+        break;
+
+      // ... other actions ...
+
+      default:
+        break;
+    }
+  }
+
 }
